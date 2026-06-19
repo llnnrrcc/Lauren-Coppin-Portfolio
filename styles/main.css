@@ -9,7 +9,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     line-height: 1.6; 
     color: #333; 
-    max-width: 800px; 
+    max-width: 1200px; 
     margin: 0 auto; 
     padding: 20px;
     
@@ -127,14 +127,18 @@ nav a.active {
     padding: 40px;
     border-radius: 15px;
     min-height: 420px;
+    width: 95%;          /* Uses 90% of available space */
+    max-width: 1000px;    /* Keeps it from getting too big */
+    
     margin-top: 40px;
+    margin-left: auto;   /* Centers horizontally */
+    margin-right: auto;  /* Centers horizontally */
 }
 
 .image-stack {
     position: relative;
     width: 200px;
     height: 250px;
-    margin-top: -90px;
     margin-left: -40px;
 }
 
