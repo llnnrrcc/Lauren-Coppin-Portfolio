@@ -94,3 +94,18 @@ nav a.active {
 .image-container {
     flex-shrink: 0;     /* Prevents the image from shrinking */
 }
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: transparent;   /* Removes the semi-transparent box */
+    padding: 20px;
+    border-radius: 10px;       /* Keeps the rounded corners */
+    border: 2px solid #333;    /* Adds the solid black frame */
+    text-align: right;
+}
