@@ -32,6 +32,8 @@ main {
 header {
     padding-bottom: 10px;
     margin-bottom: 20px;
+    padding: 1rem 0; 
+    text-align: center;
 }
 
 /* Navigation Buttons */
@@ -39,7 +41,7 @@ nav {
     display: flex;
     gap: 30px; /* Adds space between buttons */
     margin-top: 40px;
-    justify-content: centre;
+    justify-content: center;
 }
 
 nav a {
