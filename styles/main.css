@@ -162,12 +162,38 @@ nav a.active {
     margin-top: 30px; /* Space between frame and buttons */
 }
 
-/* Base style for nav buttons */
-.nav-arrow {
-    background: none;
-    border: none;
-    font-size: 2rem;
+
+
+/* Container for the arrow shape and border */
+.nav-arrow-block {
+    background-color: #333; /* This serves as the 'border' color */
+    width: 100px;
+    height: 50px;
     cursor: pointer;
+    position: relative;
+    border: none;
+    transition: background-color 0.3s;
+    /* Clip to the block-arrow shape */
+    clip-path: polygon(0% 20%, 70% 20%, 70% 0%, 100% 50%, 70% 100%, 70% 80%, 0% 80%);
+}
+
+/* Inner white part to create the border effect */
+.nav-arrow-block::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px; right: 3px; bottom: 3px;
+    background-color: white;
+    clip-path: polygon(0% 20%, 70% 20%, 70% 0%, 100% 50%, 70% 100%, 70% 80%, 0% 80%);
+}
+
+/* Hover state */
+.nav-arrow-block:hover::after {
+    background-color: #a8a5a5;
+}
+
+/* Rotation for the left-facing arrow */
+.left-arrow {
+    transform: rotate(180deg);
 }
 
 .project-list-btn {
@@ -176,4 +202,20 @@ nav a.active {
     border-radius: 20px;
     background: white;
     cursor: pointer;
+}
+
+/* Animation for the sliding effect */
+.slide-in {
+    animation: slideRight 0.4s ease-out;
+}
+
+@keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px); /* Start slightly to the left */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);     /* Slide into position */
+    }
 }
