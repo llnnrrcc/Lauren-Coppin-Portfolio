@@ -54,17 +54,30 @@
         </div>
 </div>
 
-<!-- Ensure ALL these exist in projects.html -->
+<!-- Replace your current #imageModal div with this structure -->
 <div id="imageModal" class="modal">
     <span class="close-modal">&times;</span>
+    
+    <!-- Key Overlay -->
+    <img src="assets/NETWORKS/key.png" id="modal-key-overlay" style="display: none; position: fixed; bottom: 80px; left: 40px; width: 200px; z-index: 3000; pointer-events: none;">
+
+    <!-- Zoom and Filter Controls grouped together -->
     <div class="zoom-controls">
+        <!-- New Filter Buttons -->
+        <div id="network-filters">
+            <button id="showLogical">Logical Design</button>
+            <button id="showPhysical">Physical Design</button>
+        </div>
+        
+        <!-- Zoom Buttons -->
         <button id="zoomOut">-</button>
         <button id="zoomIn">+</button>
     </div>
+
     <button id="modalPrev" class="nav-arrow-block left-arrow"></button>
     <button id="modalNext" class="nav-arrow-block"></button>
-<!-- Inside your imageModal div -->
-<img src="assets/NETWORKS/key.png" id="modal-key-overlay" style="display: none; position: fixed; bottom: 80px; left: 40px; width: 200px; z-index: 3000; pointer-events: none;">    <div class="modal-content" id="modal-container"></div>
+
+    <div class="modal-content" id="modal-container"></div>
 </div>
 </div>
 </body>

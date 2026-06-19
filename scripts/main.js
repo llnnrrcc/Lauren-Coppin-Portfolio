@@ -2,6 +2,7 @@
 let currentIndex = 0;
 let modalIndex = 0;
 let currentScale = 1;
+let activeFilter = 'all'; // Add this!
 // --- 2. Data Definition ---
 const projects = [
     {
@@ -18,22 +19,30 @@ const projects = [
     }
 ];
 function updateModalDisplay(container) {
-    const images = container.querySelectorAll('img');
+    // Convert NodeList to Array to enable .filter()
+    const images = Array.from(container.querySelectorAll('img'));
     const keyOverlay = document.getElementById('modal-key-overlay');
-    images.forEach((img, idx) => {
-        // Toggle visibility based on index
-        img.style.display = (idx === modalIndex) ? 'block' : 'none';
-        img.style.transform = `scale(${currentScale})`;
-        // If this is the active image, check if the key should be visible
-        if (idx === modalIndex) {
-            if (img.src.includes("physical")) {
-                keyOverlay.style.display = 'block';
-            }
-            else {
-                keyOverlay.style.display = 'none';
-            }
-        }
+    // Filter images based on current activeFilter state
+    const filteredImages = images.filter(img => {
+        if (activeFilter === 'all')
+            return true;
+        return img.src.includes(activeFilter);
     });
+    // Hide all images initially
+    images.forEach(img => img.style.display = 'none');
+    // Show the active image in the filtered list
+    if (filteredImages[modalIndex]) {
+        const activeImg = filteredImages[modalIndex];
+        activeImg.style.display = 'block';
+        activeImg.style.transform = `scale(${currentScale})`;
+        // Key overlay only shows if the active image is a "physical" design
+        if (activeImg.src.includes("physical")) {
+            keyOverlay.style.display = 'block';
+        }
+        else {
+            keyOverlay.style.display = 'none';
+        }
+    }
 }
 // --- 4. Main Project Switcher ---
 export function switchProject(direction) {
@@ -81,6 +90,7 @@ export function switchProject(direction) {
         container.innerHTML = '';
         currentScale = 1;
         modalIndex = 0;
+        activeFilter = 'all';
         if (project.title.includes("Networks")) {
             keyOverlay.style.display = 'block';
         }
@@ -92,6 +102,8 @@ export function switchProject(direction) {
             img.src = src;
             container.appendChild(img);
         });
+        const networkFilters = document.getElementById('network-filters');
+        networkFilters.style.display = project.title.includes("Networks") ? 'flex' : 'none';
         updateModalDisplay(container);
         modal.style.display = 'flex';
     };
@@ -136,5 +148,20 @@ document.addEventListener('DOMContentLoaded', () => {
             updateModalDisplay(modalContainer);
         }
     };
+    const logicalBtn = document.getElementById('showLogical');
+    const physicalBtn = document.getElementById('showPhysical');
+    if (logicalBtn && physicalBtn) {
+        // Use ! to tell TypeScript "this element definitely exists"
+        logicalBtn.onclick = () => {
+            activeFilter = 'logical';
+            modalIndex = 0;
+            updateModalDisplay(document.getElementById('modal-container'));
+        };
+        physicalBtn.onclick = () => {
+            activeFilter = 'physical';
+            modalIndex = 0;
+            updateModalDisplay(document.getElementById('modal-container'));
+        };
+    }
 });
 //# sourceMappingURL=main.js.map

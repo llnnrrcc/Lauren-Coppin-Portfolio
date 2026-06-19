@@ -330,6 +330,27 @@ nav a.active {
     pointer-events: none; /* Allows clicking through it if needed */
 }
 
+/* Container for Logical/Physical filters */
+#network-filters {
+    display: none; /* Hidden by default, toggled via JS */
+    gap: 10px;
+}
+
+#network-filters button {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+#network-filters button:hover {
+    background: #eee;
+}
+
 @keyframes slideRight {
     0% {
         opacity: 0;
