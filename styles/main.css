@@ -65,12 +65,21 @@ nav a.active {
     background-color: #a8a5a5; /* Darker gray for active state */
 }
 
+/* Layout for side-by-side elements */
 .content-wrapper {
     display: flex;
-    justify-content: flex-end; /* This pushes the child elements to the right */
+    align-items: center; /* Vertically centers the image and text */
+    gap: 40px;          /* Adds space between the photo and text */
 }
 
-.content-right {
-    width: 60%; /* Adjust this percentage to control how much space the text takes */
-    text-align: left; /* Keeps your text aligned to the left within the right-hand box */
+/* Photo styling */
+.profile-img {
+    width: 300px;       /* Set your preferred width */
+    height: 300px;      /* Match width to make it a square */
+    border-radius: 50%; /* This turns the image into a circle */
+    object-fit: cover;  /* Ensures the photo fills the circle without stretching */
+}
+
+.image-container {
+    flex-shrink: 0;     /* Prevents the image from shrinking */
 }
