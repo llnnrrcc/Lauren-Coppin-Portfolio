@@ -248,15 +248,6 @@ nav a.active {
     background-color: rgba(0,0,0,0.8); /* Dark semi-transparent background */
 }
 
-.modal-content {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 20px;
-    gap: 20px;
-    align-items: center;
-}
-
 /* X Button Styling */
 .close-modal {
     position: fixed; /* Stays in top right corner */
@@ -268,12 +259,19 @@ nav a.active {
     z-index: 1001; /* Above everything */
 }
 
+.modal-content {
+    display: flex;
+    justify-content: center; /* Centers the single image */
+    align-items: center;
+    overflow: hidden;        /* Hides the "overflow mess" */
+    width: 100vw;
+    height: 100vh;
+}
+
 .modal-content img {
-    flex: 0 0 auto;
-    max-height: 80vh;
-    border: 3px solid white;
-    cursor: zoom-in;
-    transition: transform 0.3s ease; /* Smooth zooming */
+    max-width: 80%;
+    max-height: 80%;
+    transition: transform 0.3s ease;
 }
 
 .zoom-controls {

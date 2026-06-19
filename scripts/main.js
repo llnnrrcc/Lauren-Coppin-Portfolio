@@ -1,19 +1,31 @@
-// Define your project data
+// --- 1. Global State ---
+let currentIndex = 0;
+let modalIndex = 0;
+let currentScale = 1;
+// --- 2. Data Definition ---
 const projects = [
     {
         title: "PetSync",
         purpose: "A central mobile hub for tracking pet health metrics...",
-        className: "", // Empty string means no extra layout changes
+        className: "",
         images: ["assets/PETSYNC/petsync3.png", "assets/PETSYNC/petsync2.png", "assets/PETSYNC/petsync1.png"]
     },
     {
         title: "Networks - Festivity Junction Tender",
         purpose: "Acted as a contractor to design, deploy, and manage a temporary computer network...",
-        className: "networks-layout", // This specific class triggers the vertical CSS
+        className: "networks-layout",
         images: ["assets/NETWORKS/s1_physical.png", "assets/NETWORKS/full_logical.png", "assets/NETWORKS/full_physical.png"]
     }
 ];
-let currentIndex = 0;
+// --- 3. UI Helpers ---
+function updateModalDisplay(container) {
+    const images = container.querySelectorAll('img');
+    images.forEach((img, idx) => {
+        img.style.display = (idx === modalIndex) ? 'block' : 'none';
+        img.style.transform = `scale(${currentScale})`;
+    });
+}
+// --- 4. Main Project Switcher ---
 export function switchProject(direction) {
     currentIndex = (currentIndex + direction + projects.length) % projects.length;
     const project = projects[currentIndex];
@@ -23,33 +35,18 @@ export function switchProject(direction) {
     if (!card)
         return;
     card.className = `project-card ${project.className}`;
-    // Trigger animation
     card.classList.remove('slide-in');
     void card.offsetWidth;
     card.classList.add('slide-in');
-    // Update Title
     const titleElement = card.querySelector('h3');
     if (titleElement)
         titleElement.textContent = project.title;
-    // Update Purpose
     const firstListItem = card.querySelector('.project-details ul li');
     if (firstListItem)
         firstListItem.innerHTML = `<strong>Purpose:</strong> ${project.purpose}`;
-    // Ensure the Gallery Link exists and is updated
-    const detailsContainer = card.querySelector('.project-details');
-    let galleryLink = card.querySelector('.gallery-link');
-    if (!galleryLink) {
-        galleryLink = document.createElement('a');
-        galleryLink.className = "gallery-link";
-        galleryLink.href = "#";
-        galleryLink.textContent = "Click to view images";
-        detailsContainer.appendChild(galleryLink);
-    }
-    // Inside switchProject, replace your "Update Images" loop with this:
+    // Update Project Images
     const images = card.querySelectorAll('.image-stack img');
-    // Force reset all to hidden first to prevent 'ghosting' of old images
     images.forEach(img => img.style.display = 'none');
-    // Now map only the current project's images
     project.images.forEach((src, index) => {
         if (images[index]) {
             const element = images[index];
@@ -57,47 +54,62 @@ export function switchProject(direction) {
             element.style.display = 'block';
         }
     });
-    // Inside your galleryLink.onclick function in main.ts:
+    // Gallery Link Setup
+    let galleryLink = card.querySelector('.gallery-link');
+    if (!galleryLink) {
+        galleryLink = document.createElement('a');
+        galleryLink.className = "gallery-link";
+        galleryLink.href = "#";
+        galleryLink.textContent = "Click to view images";
+        card.querySelector('.project-details')?.appendChild(galleryLink);
+    }
     galleryLink.onclick = (e) => {
         e.preventDefault();
         const modal = document.getElementById('imageModal');
         const container = document.getElementById('modal-container');
         container.innerHTML = '';
-        let currentScale = 1;
+        currentScale = 1;
+        modalIndex = 0;
         project.images.forEach(src => {
             const img = document.createElement('img');
             img.src = src;
-            img.style.transform = `scale(${currentScale})`;
             container.appendChild(img);
         });
-        // Zoom Controls Logic
-        const zoomInBtn = document.getElementById('zoomIn');
-        const zoomOutBtn = document.getElementById('zoomOut');
-        if (zoomInBtn && zoomOutBtn) {
-            zoomInBtn.onclick = () => {
-                currentScale += 0.2;
-                container.querySelectorAll('img').forEach(img => img.style.transform = `scale(${currentScale})`);
-            };
-            zoomOutBtn.onclick = () => {
-                if (currentScale > 0.4)
-                    currentScale -= 0.2;
-                container.querySelectorAll('img').forEach(img => img.style.transform = `scale(${currentScale})`);
-            };
-        }
+        updateModalDisplay(container);
         modal.style.display = 'flex';
     };
 }
+// --- 5. Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    console.log("Prev Button found:", prevBtn);
-    console.log("Next Button found:", nextBtn);
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', () => switchProject(-1));
-        nextBtn.addEventListener('click', () => switchProject(1));
-    }
-    else {
-        console.error("Buttons not found! Check your IDs in projects.html");
-    }
+    // Carousel Nav
+    document.getElementById('prevBtn')?.addEventListener('click', () => switchProject(-1));
+    document.getElementById('nextBtn')?.addEventListener('click', () => switchProject(1));
+    // Modal Global Controls
+    document.querySelector('.close-modal')?.addEventListener('click', () => {
+        document.getElementById('imageModal').style.display = 'none';
+    });
+    const modalContainer = document.getElementById('modal-container');
+    document.getElementById('zoomIn').onclick = () => {
+        currentScale += 0.2;
+        updateModalDisplay(modalContainer);
+    };
+    document.getElementById('zoomOut').onclick = () => {
+        if (currentScale > 0.4)
+            currentScale -= 0.2;
+        updateModalDisplay(modalContainer);
+    };
+    document.getElementById('modalNext').onclick = () => {
+        const imgs = modalContainer.querySelectorAll('img');
+        if (modalIndex < imgs.length - 1) {
+            modalIndex++;
+            updateModalDisplay(modalContainer);
+        }
+    };
+    document.getElementById('modalPrev').onclick = () => {
+        if (modalIndex > 0) {
+            modalIndex--;
+            updateModalDisplay(modalContainer);
+        }
+    };
 });
 //# sourceMappingURL=main.js.map
