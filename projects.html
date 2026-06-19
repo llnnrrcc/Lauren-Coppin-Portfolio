@@ -18,8 +18,35 @@
     </header>
 
     <main>
-        <h2>Project Gallery</h2>
-        <p>Stay tuned for my featured projects and technical labs.</p>
-    </main>
+    <h2>My Projects</h2>
+    
+    <div class="project-carousel">
+        <button class="nav-arrow left" onclick="prevProject()">&#8592;</button>
+
+        <div class="project-card">
+            <div class="image-stack">
+                <img src="assets/PETSYNC/petsync3.png" alt="App Image" class="stack-img">
+                <img src="assets/PETSYNC/petsync2.png" alt="App Image" class="stack-img">
+                <img src="assets/PETSYNC/petsync1.png" alt="App Image" class="stack-img">
+                <p class="click-text">Click me to view</p>
+            </div>
+            
+            <div class="project-details">
+                <h3>PetSync (SETAP-B)</h3>
+                <ul>
+                    <li>A one-sentence description of the app's purpose.</li>
+                    <li><strong>The Problem:</strong> ...</li>
+                    <li><strong>Tech Stack:</strong> Flutter, Dart, Python, SQLAlchemy.</li>
+                    <li><strong>Accessibility:</strong> ARIA labels, semantic HTML.</li>
+                </ul>
+                <a href="#">Repository Link</a>
+            </div>
+        </div>
+
+        <button class="nav-arrow right" onclick="nextProject()">&#8594;</button>
+    </div>
+    
+    <button class="project-list-btn">Project List</button>
+</main>
 </body>
 </html>
