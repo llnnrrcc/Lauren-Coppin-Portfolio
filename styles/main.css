@@ -5,10 +5,27 @@
     padding: 0;
 }
 
-body {
-    font-family: sans-serif;
-    line-height: 1.6;
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    line-height: 1.6; 
+    color: #333; 
+    max-width: 800px; 
+    margin: 0 auto; 
     padding: 20px;
+    
+    /* New background styles */
+    background-image: url('../assets/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Keeps the background static while scrolling */
+}
+
+/* Add a semi-transparent white background to your content areas 
+   so the text is readable over the photo */
+main { 
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 2rem; 
+    border-radius: 8px;
 }
 
 header {
