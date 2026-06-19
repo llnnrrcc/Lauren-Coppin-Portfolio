@@ -29,20 +29,39 @@ export function switchProject(direction) {
     card.classList.add('slide-in');
     // Update Title
     const titleElement = card.querySelector('h3');
-    if (titleElement) {
+    if (titleElement)
         titleElement.textContent = project.title;
-    }
     // Update Purpose
     const firstListItem = card.querySelector('.project-details ul li');
-    if (firstListItem) {
+    if (firstListItem)
         firstListItem.innerHTML = `<strong>Purpose:</strong> ${project.purpose}`;
+    // Ensure the Gallery Link exists and is updated
+    const detailsContainer = card.querySelector('.project-details');
+    let galleryLink = card.querySelector('.gallery-link');
+    if (!galleryLink) {
+        galleryLink = document.createElement('a');
+        galleryLink.className = "gallery-link";
+        galleryLink.href = "#";
+        galleryLink.textContent = "Click to view images";
+        detailsContainer.appendChild(galleryLink);
     }
-    // ADD THIS: Define 'images' so the forEach loop knows what to iterate over
+    galleryLink.onclick = (e) => {
+        e.preventDefault();
+        const modal = document.getElementById('imageModal');
+        const container = document.getElementById('modal-container');
+        container.innerHTML = '';
+        project.images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            container.appendChild(img);
+        });
+        modal.style.display = 'flex';
+    };
+    // Update Images
     const images = card.querySelectorAll('.image-stack img');
     images.forEach((img, index) => {
         const element = img;
         const newSrc = project.images[index];
-        console.log("Attempting to load:", newSrc);
         if (newSrc) {
             element.src = newSrc;
             element.style.display = 'block';

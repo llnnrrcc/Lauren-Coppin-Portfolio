@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>Image Gallery</title><link rel="stylesheet" href="styles/main.css"></head>
+<body>
+    <div id="gallery-container" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 50px;"></div>
+    <script>
+        // Get images from URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const images = params.get('imgs').split(',');
+        const container = document.getElementById('gallery-container');
+        
+        images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.width = '300px';
+            img.style.cursor = 'pointer';
+            img.onclick = () => window.open(src, '_blank'); // Expand on click
+            container.appendChild(img);
+        });
+    </script>
+</body>
+</html>
