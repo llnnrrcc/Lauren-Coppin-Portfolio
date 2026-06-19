@@ -19,12 +19,23 @@ const projects = [
     }
 ];
 
-// --- 3. UI Helpers ---
 function updateModalDisplay(container: HTMLElement) {
     const images = container.querySelectorAll('img');
+    const keyOverlay = document.getElementById('modal-key-overlay') as HTMLImageElement;
+
     images.forEach((img, idx) => {
+        // Toggle visibility based on index
         img.style.display = (idx === modalIndex) ? 'block' : 'none';
         img.style.transform = `scale(${currentScale})`;
+
+        // If this is the active image, check if the key should be visible
+        if (idx === modalIndex) {
+            if (img.src.includes("physical")) {
+                keyOverlay.style.display = 'block';
+            } else {
+                keyOverlay.style.display = 'none';
+            }
+        }
     });
 }
 
@@ -73,9 +84,17 @@ export function switchProject(direction: number): void {
         e.preventDefault();
         const modal = document.getElementById('imageModal') as HTMLElement;
         const container = document.getElementById('modal-container') as HTMLElement;
+        const keyOverlay = document.getElementById('modal-key-overlay') as HTMLImageElement;
+
         container.innerHTML = ''; 
         currentScale = 1;
         modalIndex = 0;
+
+        if (project.title.includes("Networks")) {
+        keyOverlay.style.display = 'block';
+        } else {
+        keyOverlay.style.display = 'none';
+        }
 
         project.images.forEach(src => {
             const img = document.createElement('img');
@@ -86,6 +105,12 @@ export function switchProject(direction: number): void {
         updateModalDisplay(container);
         modal.style.display = 'flex';
     };
+
+    // Ensure it hides when closing
+    document.querySelector('.close-modal')?.addEventListener('click', () => {
+        document.getElementById('imageModal')!.style.display = 'none';
+        document.getElementById('modal-key-overlay')!.style.display = 'none';
+    });
 }
 
 // --- 5. Initialization ---

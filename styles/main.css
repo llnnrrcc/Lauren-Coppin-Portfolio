@@ -321,6 +321,15 @@ nav a.active {
     transform: translateY(-50%);
 }
 
+#modal-key-overlay {
+    position: fixed;
+    bottom: 80px; /* Stays above your zoom buttons */
+    left: 40px;
+    width: 200px; /* Adjust size to fit your design */
+    z-index: 3000;
+    pointer-events: none; /* Allows clicking through it if needed */
+}
+
 @keyframes slideRight {
     0% {
         opacity: 0;
