@@ -54,16 +54,17 @@
         </div>
 </div>
 
+<!-- Ensure ALL these exist in projects.html -->
 <div id="imageModal" class="modal">
     <span class="close-modal">&times;</span>
-
-    <!-- Carousel Arrows -->
-    <button class="nav-arrow-block left-arrow" id="modalPrev" style="position:fixed; left: 20px; top: 50%;"></button>
-    <button class="nav-arrow-block" id="modalNext" style="position:fixed; right: 20px; top: 50%;"></button>
-
-    <div class="modal-content" id="modal-container">
-        <!-- Images will be injected here -->
+    <div class="zoom-controls">
+        <button id="zoomOut">-</button>
+        <button id="zoomIn">+</button>
     </div>
+    <button id="modalPrev" class="nav-arrow-block left-arrow"></button>
+    <button id="modalNext" class="nav-arrow-block"></button>
+    <div class="modal-content" id="modal-container"></div>
+</div>
 </div>
 </body>
 </html>

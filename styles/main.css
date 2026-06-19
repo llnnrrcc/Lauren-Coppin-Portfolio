@@ -298,6 +298,29 @@ nav a.active {
 .zoom-controls button:hover {
     background: #eee;
 }
+
+/* Ensure the arrows are positioned relative to the screen, not the page */
+/* Only affect arrows inside the modal */
+#imageModal .nav-arrow-block {
+    position: fixed !important;
+    top: 50% !important;
+    transform: translateY(-50%);
+    z-index: 3000 !important;
+    cursor: pointer;
+    background-color: #333; /* Ensuring visibility */
+}
+
+/* Specific positioning for the modal-only arrows */
+#imageModal #modalPrev {
+    left: 20px !important;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+#imageModal #modalNext {
+    right: 20px !important;
+    transform: translateY(-50%);
+}
+
 @keyframes slideRight {
     0% {
         opacity: 0;

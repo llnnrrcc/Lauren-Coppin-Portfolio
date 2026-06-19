@@ -98,14 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
             currentScale -= 0.2;
         updateModalDisplay(modalContainer);
     };
+    // Navigation Listeners (Place these inside your DOMContentLoaded block)
     document.getElementById('modalNext').onclick = () => {
-        const imgs = modalContainer.querySelectorAll('img');
-        if (modalIndex < imgs.length - 1) {
+        const images = modalContainer.querySelectorAll('img');
+        // Ensure we don't go past the last image
+        if (modalIndex < images.length - 1) {
             modalIndex++;
             updateModalDisplay(modalContainer);
         }
     };
     document.getElementById('modalPrev').onclick = () => {
+        // Ensure we don't go below the first image
         if (modalIndex > 0) {
             modalIndex--;
             updateModalDisplay(modalContainer);

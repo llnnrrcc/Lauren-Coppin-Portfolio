@@ -109,11 +109,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentScale > 0.4) currentScale -= 0.2;
         updateModalDisplay(modalContainer);
     };
-    document.getElementById('modalNext')!.onclick = () => {
-        const imgs = modalContainer.querySelectorAll('img');
-        if (modalIndex < imgs.length - 1) { modalIndex++; updateModalDisplay(modalContainer); }
-    };
-    document.getElementById('modalPrev')!.onclick = () => {
-        if (modalIndex > 0) { modalIndex--; updateModalDisplay(modalContainer); }
-    };
+    // Navigation Listeners (Place these inside your DOMContentLoaded block)
+document.getElementById('modalNext')!.onclick = () => {
+    const images = modalContainer.querySelectorAll('img');
+    // Ensure we don't go past the last image
+    if (modalIndex < images.length - 1) { 
+        modalIndex++; 
+        updateModalDisplay(modalContainer); 
+    }
+};
+
+document.getElementById('modalPrev')!.onclick = () => {
+    // Ensure we don't go below the first image
+    if (modalIndex > 0) { 
+        modalIndex--; 
+        updateModalDisplay(modalContainer); 
+    }
+};
 });
