@@ -34,16 +34,32 @@ header {
     margin-bottom: 20px;
 }
 
-nav a {
-    margin-right: 15px;
-    text-decoration: none;
-    color: #007bff;
+/* Navigation Buttons */
+nav {
+    display: flex;
+    gap: 15px; /* Adds space between buttons */
+    margin-top: 1rem;
 }
 
-footer {
-    margin-top: 40px;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 0.9em;
-    color: #666;
+nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 25px;
+    border: 2px solid #333; /* Dark border */
+    border-radius: 50px;    /* The "pill" shape */
+    background-color: white;
+    font-weight: 500;
+    transition: all 0.3s ease; /* Smooth color changes */
+}
+
+/* Hover Effect */
+nav a:hover {
+    background-color: #d1cfcf; /* Light gray hover */
+    cursor: pointer;
+}
+
+/* Active Page State */
+/* We will apply this class to the link of the page you are currently on */
+nav a.active {
+    background-color: #a8a5a5; /* Darker gray for active state */
 }
