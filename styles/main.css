@@ -134,7 +134,7 @@ nav a.active {
     position: relative;
     width: 200px;
     height: 250px;
-    margin-top: -70px;
+    margin-top: -90px;
     margin-left: -40px;
 }
 
@@ -146,5 +146,30 @@ nav a.active {
     background: white;
 }
 /* Adding a slight offset to create the "stack" look */
-.stack-img:nth-child(2) { top: 10px; left: 10px; }
-.stack-img:nth-child(3) { top: 20px; left: 20px; }
+.stack-img:nth-child(2) { top: 10px; left: 18px; }
+.stack-img:nth-child(3) { top: 20px; left: 38px; }
+
+/* Container for the arrows and Project List button */
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 30px; /* Space between frame and buttons */
+}
+
+/* Base style for nav buttons */
+.nav-arrow {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.project-list-btn {
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+}
