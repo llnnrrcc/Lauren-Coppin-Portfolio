@@ -37,19 +37,29 @@ header {
 /* Navigation Buttons */
 nav {
     display: flex;
-    gap: 15px; /* Adds space between buttons */
-    margin-top: 1rem;
+    gap: 30px; /* Adds space between buttons */
+    margin-top: 40px;
+    justify-content: centre;
 }
 
 nav a {
     text-decoration: none;
     color: #333;
-    padding: 10px 25px;
-    border: 2px solid #333; /* Dark border */
-    border-radius: 50px;    /* The "pill" shape */
+    
+    /* Fixed dimensions for uniformity */
+    width: 180px;        /* Adjust this exact pixel value to match your design */
+    height: 40px;        /* Adjust this to match your design height */
+    
+    /* Flexbox centers the text perfectly within the fixed box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 2px solid #333;
+    border-radius: 50px;
     background-color: white;
     font-weight: 500;
-    transition: all 0.3s ease; /* Smooth color changes */
+    transition: all 0.3s ease;
 }
 
 /* Hover Effect */
