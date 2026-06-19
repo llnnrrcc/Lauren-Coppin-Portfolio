@@ -209,6 +209,36 @@ nav a.active {
     animation: slideRight 0.4s ease-out;
 }
 
+/* Add this to your CSS */
+.image-stack img {
+    max-width: 100%;    /* Image won't overflow the card */
+    height: auto;       /* Maintains aspect ratio */
+    object-fit: contain; /* Ensures the whole image is visible */
+    display: block;      /* Prevents unwanted gaps */
+}
+
+.networks-layout .image-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 400px !important;
+    margin-right: 20px !important;
+}
+
+.networks-layout .image-stack img {
+    max-height: 120px !important;
+    width: auto !important;
+}
+
+/* Override absolute positioning for the networks layout */
+.networks-layout .image-stack .stack-img {
+    position: static !important; /* Removes them from absolute flow */
+    top: auto !important; 
+    left: auto !important;
+    margin: 0 !important;
+    border: 1px solid #333;
+}
+
 @keyframes slideRight {
     0% {
         opacity: 0;
