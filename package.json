@@ -1,6 +1,7 @@
 {
   "name": "lauren-coppin-portfolio",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,12 +14,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/llnnrrcc/Lauren-Coppin-Portfolio/issues"
   },
-  "homepage": "https://github.com/llnnrrcc/Lauren-Coppin-Portfolio#readme",
-  "devDependencies": {
-    "typescript": "^6.0.3"
-  }
+  "homepage": "https://github.com/llnnrrcc/Lauren-Coppin-Portfolio#readme"
 }
