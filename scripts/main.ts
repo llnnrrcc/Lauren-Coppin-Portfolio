@@ -53,31 +53,55 @@ export function switchProject(direction: number): void {
         detailsContainer.appendChild(galleryLink);
     }
 
-    galleryLink.onclick = (e) => {
-        e.preventDefault();
-        const modal = document.getElementById('imageModal') as HTMLElement;
-        const container = document.getElementById('modal-container') as HTMLElement;
-        container.innerHTML = ''; 
-        project.images.forEach(src => {
-            const img = document.createElement('img');
-            img.src = src;
-            container.appendChild(img);
-        });
-        modal.style.display = 'flex';
-    };
+    // Inside switchProject, replace your "Update Images" loop with this:
+const images = card.querySelectorAll('.image-stack img');
 
-    // Update Images
-    const images = card.querySelectorAll('.image-stack img');
-    images.forEach((img, index) => {
-        const element = img as HTMLImageElement;
-        const newSrc = project.images[index];
-        if (newSrc) {
-            element.src = newSrc;
-            element.style.display = 'block';
-        } else {
-            element.style.display = 'none';
-        }
+// Force reset all to hidden first to prevent 'ghosting' of old images
+images.forEach(img => (img as HTMLImageElement).style.display = 'none');
+
+// Now map only the current project's images
+project.images.forEach((src, index) => {
+    if (images[index]) {
+        const element = images[index] as HTMLImageElement;
+        element.src = src;
+        element.style.display = 'block';
+    }
+});
+
+    // Inside your galleryLink.onclick function in main.ts:
+
+galleryLink.onclick = (e) => {
+    e.preventDefault();
+    const modal = document.getElementById('imageModal') as HTMLElement;
+    const container = document.getElementById('modal-container') as HTMLElement;
+    container.innerHTML = ''; 
+    
+    let currentScale = 1;
+
+    project.images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.transform = `scale(${currentScale})`;
+        container.appendChild(img);
     });
+
+    // Zoom Controls Logic
+    const zoomInBtn = document.getElementById('zoomIn');
+    const zoomOutBtn = document.getElementById('zoomOut');
+
+    if (zoomInBtn && zoomOutBtn) {
+        zoomInBtn.onclick = () => {
+            currentScale += 0.2;
+            container.querySelectorAll('img').forEach(img => img.style.transform = `scale(${currentScale})`);
+        };
+        zoomOutBtn.onclick = () => {
+            if (currentScale > 0.4) currentScale -= 0.2;
+            container.querySelectorAll('img').forEach(img => img.style.transform = `scale(${currentScale})`);
+        };
+    }
+    
+    modal.style.display = 'flex';
+};
 }
 
 
