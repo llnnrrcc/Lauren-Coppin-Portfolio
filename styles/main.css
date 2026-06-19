@@ -63,3 +63,13 @@ nav a:hover {
 nav a.active {
     background-color: #a8a5a5; /* Darker gray for active state */
 }
+
+.content-wrapper {
+    display: flex;
+    justify-content: flex-end; /* This pushes the child elements to the right */
+}
+
+.content-right {
+    width: 60%; /* Adjust this percentage to control how much space the text takes */
+    text-align: left; /* Keeps your text aligned to the left within the right-hand box */
+}
