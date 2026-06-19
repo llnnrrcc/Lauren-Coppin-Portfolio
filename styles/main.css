@@ -323,7 +323,7 @@ nav a.active {
 
 #modal-key-overlay {
     position: fixed;
-    bottom: 80px; /* Stays above your zoom buttons */
+    top: 20px; /* Stays above your zoom buttons */
     left: 40px;
     width: 200px; /* Adjust size to fit your design */
     z-index: 3000;
