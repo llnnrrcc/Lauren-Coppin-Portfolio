@@ -231,4 +231,53 @@ physicalBtn.onclick = () => {
     updateModalDisplay(document.getElementById('modal-container')!);
 };
     }
+
+    // Project List Modal Setup
+    const projectListBtn = document.getElementById('projectListBtn');
+    const projectListModal = document.getElementById('projectListModal') as HTMLElement;
+    const projectListItems = document.getElementById('projectListItems') as HTMLElement;
+    const closeProjectList = document.querySelector('.close-project-list') as HTMLElement;
+
+    if (projectListBtn && projectListModal && projectListItems) {
+        // Populate project list
+        projectListItems.innerHTML = '';
+        projects.forEach((project, index) => {
+            const item = document.createElement('div');
+            item.className = `project-list-item ${index === currentIndex ? 'active' : ''}`;
+            item.textContent = project.title;
+            item.onclick = () => {
+                currentIndex = index;
+                switchProject(0);
+                projectListModal.style.display = 'none';
+                // Update active state in list
+                document.querySelectorAll('.project-list-item').forEach((el, i) => {
+                    if (i === index) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.remove('active');
+                    }
+                });
+            };
+            projectListItems.appendChild(item);
+        });
+
+        // Open modal on button click
+        projectListBtn.onclick = () => {
+            projectListModal.style.display = 'block';
+        };
+
+        // Close modal on X click
+        if (closeProjectList) {
+            closeProjectList.onclick = () => {
+                projectListModal.style.display = 'none';
+            };
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = (event) => {
+            if (event.target === projectListModal) {
+                projectListModal.style.display = 'none';
+            }
+        };
+    }
 });
