@@ -3,19 +3,33 @@ let currentIndex = 0;
 let modalIndex = 0;
 let currentScale = 1;
 let activeFilter = 'all'; // Add this!
-// --- 2. Data Definition ---
 const projects = [
     {
         title: "PetSync",
-        purpose: "A central mobile hub for tracking pet health metrics...",
+        purpose: "A central mobile hub for tracking pet health metrics, managing vet appointments, and scheduling care with shared responsibility.",
         className: "",
-        images: ["assets/PETSYNC/petsync3.png", "assets/PETSYNC/petsync2.png", "assets/PETSYNC/petsync1.png"]
+        images: ["assets/PETSYNC/petsync3.png", "assets/PETSYNC/petsync2.png", "assets/PETSYNC/petsync1.png"],
+        details: [
+            { label: "User-Driven Design", content: "Identified three distinct owner monitoring styles—Intuition-based, Mental record keepers, and Data-driven—to ensure the app catered to both simple logging and advanced analytics." },
+            { label: "Tech Stack", content: "Built on a microservices-inspired architecture using Flutter/Dart for cross-platform UI, and Python/FastAPI with PostgreSQL for robust backend operations." },
+            { label: "Key Features", content: "Implemented species-specific intelligence to filter irrelevant metrics, automated threshold checks for early health risk detection, and offline caching for reliable data access." },
+            { label: "Performance & Reliability", content: "Optimized for a 2-second dashboard load time (NF2) and ensured system resilience through an Event Broker for asynchronous tasks." },
+            { label: "Resources", content: ["GitHub Repository: https://github.com/lula1450/SETAP-B.git", "Documentation: https://tutorial1-team7b.readthedocs.io/en/latest/"] }
+        ]
     },
     {
         title: "Networks - Festivity Junction Tender",
-        purpose: "Acted as a contractor to design, deploy, and manage a temporary computer network...",
+        purpose: "Acted as a contractor to design, deploy, and manage a temporary computer network to ensure reliable connectivity for a large-scale event.",
         className: "networks-layout",
-        images: ["assets/NETWORKS/s1_physical.png", "assets/NETWORKS/full_logical.png", "assets/NETWORKS/full_physical.png"]
+        images: ["assets/NETWORKS/s1_physical.png", "assets/NETWORKS/full_logical.png", "assets/NETWORKS/full_physical.png"],
+        details: [
+            { label: "Project Scope", content: "Designed and implemented a high-capacity temporary network for a large-scale public event, supporting over 500 concurrent connections." },
+            { label: "Architecture", content: "Developed a tiered design using both logical VLAN segmentation to isolate traffic and physical cabling infrastructure for site-wide connectivity." },
+            { label: "Tech Stack", content: "Configured Cisco switches and firewalls to manage traffic; utilized Nmap and Wireshark for continuous performance monitoring and security auditing." },
+            { label: "Problem Solving", content: "Mitigated potential signal interference in high-traffic areas by optimizing wireless access point (WAP) placement and frequency selection." },
+            { label: "Resilience", content: "Implemented redundant backhaul connections to ensure 99.9% uptime during peak event hours." },
+            { label: "Resources", content: ["GitHub Repository", "Technical Design Document"] }
+        ]
     }
 ];
 function updateModalDisplay(container) {
@@ -60,9 +74,29 @@ export function switchProject(direction) {
     const titleElement = card.querySelector('h3');
     if (titleElement)
         titleElement.textContent = project.title;
-    const firstListItem = card.querySelector('.project-details ul li');
-    if (firstListItem)
-        firstListItem.innerHTML = `<strong>Purpose:</strong> ${project.purpose}`;
+    // Dynamically build the details list
+    const detailsList = card.querySelector('.project-details ul');
+    if (detailsList) {
+        detailsList.innerHTML = '';
+        // Add Purpose
+        const purposeItem = document.createElement('li');
+        purposeItem.innerHTML = `<strong>Purpose:</strong> ${project.purpose}`;
+        detailsList.appendChild(purposeItem);
+        // Add all other details
+        if (project.details) {
+            project.details.forEach(detail => {
+                const item = document.createElement('li');
+                if (Array.isArray(detail.content)) {
+                    // Handle array content (like Resources)
+                    item.innerHTML = `<strong>${detail.label}:</strong> ${detail.content.join(' | ')}`;
+                }
+                else {
+                    item.innerHTML = `<strong>${detail.label}:</strong> ${detail.content}`;
+                }
+                detailsList.appendChild(item);
+            });
+        }
+    }
     // Update Project Images
     const images = card.querySelectorAll('.image-stack img');
     images.forEach(img => img.style.display = 'none');
